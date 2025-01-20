@@ -1,8 +1,8 @@
 ## Diseño
 
-- [ ] Crear mockup
+- [x] Crear mockup
     - [x] Mockup básico
-    - [ ] Mockup de todas las pantallas
+    - [x] Mockup de todas las pantallas
 - [ ] Diseñar layouts en AS
     - [ ] Página principal
     - [ ] Ver categoría
