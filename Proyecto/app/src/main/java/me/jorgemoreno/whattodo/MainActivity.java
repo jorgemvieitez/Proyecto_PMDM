@@ -9,6 +9,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+        FragmentManager fmgr = getSupportFragmentManager();
+        FragmentTransaction trans = fmgr.beginTransaction();
+
+        Fragment main = new MainFragment();
+        trans.replace(R.id.fragMain, main);
+
+        trans.commit();
     }
 
     @Override
