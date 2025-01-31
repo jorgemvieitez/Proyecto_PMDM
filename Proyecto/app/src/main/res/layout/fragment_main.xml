@@ -15,11 +15,9 @@
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/listaMain"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="1dp"
-                android:layout_marginEnd="1dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

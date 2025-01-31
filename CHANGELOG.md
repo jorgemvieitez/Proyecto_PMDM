@@ -15,3 +15,13 @@
 - Añadido estilo Material (aún tengo que ponerlo en el FAB)
 - Creado primer fragmento y añadido a la actividad principal (movido FAB al fragmento)
 - Intentos con el RecyclerView para la lista
+
+## V31/01/2025
+
+- Asignado el layout al RecyclerView con un ViewAdapter
+    - Tendré que hacer esto unas cuantas veces más
+- Creada clase para Categoría (almacenar datos)
+- Creado el layout básico del RecyclerView
+    - Título (dependiente de Categoria)
+    - Botón collapse y contenidos colapsables
+    - Botón menú (sin funcionalidad todavía)
