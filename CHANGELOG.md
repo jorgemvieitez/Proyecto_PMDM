@@ -25,3 +25,10 @@
     - Título (dependiente de Categoria)
     - Botón collapse y contenidos colapsables
     - Botón menú (sin funcionalidad todavía)
+
+## Febrero
+
+## X05/02/2025
+
+- Creado menú en el RecyclerView de la lista main
+- Creada actividad de editar categoría (vacía de momento)

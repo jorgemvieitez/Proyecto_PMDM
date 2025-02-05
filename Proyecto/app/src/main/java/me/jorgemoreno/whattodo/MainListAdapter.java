@@ -1,11 +1,14 @@
 package me.jorgemoreno.whattodo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -80,6 +83,19 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
             collapse.setOnClickListener(v -> {
                 parent.onClickCollapse(this, getAdapterPosition());
+            });
+
+            menu.setOnClickListener(v -> {
+                PopupMenu popupMenu = new PopupMenu(parent.context, menu);
+                popupMenu.getMenuInflater().inflate(R.menu.menu_list_main, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener((item) -> {
+                    if (item.getItemId() == R.id.menu_list_editar) {
+                        Intent i = new Intent(parent.context, CategoriaEditActivity.class);
+                        parent.context.startActivity(i);
+                    }
+                    return true;
+                });
+                popupMenu.show();
             });
         }
 
