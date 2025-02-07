@@ -30,5 +30,10 @@
 
 ## X05/02/2025
 
-- Creado menú en el RecyclerView de la lista main
+- Creado menú en el layout de la lista main
 - Creada actividad de editar categoría (vacía de momento)
+
+## V07/02/2025
+
+- Creado fragmento principal de editar categoría (no funcional actualmente)
+- Rediseños para ser funcional en el modo oscuro

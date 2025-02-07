@@ -8,6 +8,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class CategoriaEditActivity extends AppCompatActivity {
 
@@ -26,5 +29,14 @@ public class CategoriaEditActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        FragmentManager fmgr = getSupportFragmentManager();
+        FragmentTransaction trans = fmgr.beginTransaction();
+
+        Fragment catEdit = new CategoriaEditFragment();
+        trans.replace(R.id.fragCatEdit, catEdit);
+
+        trans.commit();
     }
 }

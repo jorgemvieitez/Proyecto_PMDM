@@ -1,16 +1,32 @@
-## Diseño
-
 - [x] Crear mockup
     - [x] Mockup básico
     - [x] Mockup de todas las pantallas
-- [ ] Diseñar layouts en AS
+- [ ] Diseñar e implementar en AS
     - [ ] Página principal
+        - [x] Diseño
+        - [x] Lista principal (categorías)
+        - [ ] Lista anidada (tareas)
     - [ ] Ver categoría
     - [ ] Editar categoría
+        - [ ] Diseño
+        - [ ] Lista de metas
     - [ ] Editar meta
     - [ ] Popup: editar tarea
     - [ ] Menús
     - [ ] Versiones horizontales
-- [ ] Implementación de las actividades
 - [ ] Implementación de la funcionalidad
+    - [ ] Categorías
+        - [ ] Crear
+        - [ ] Ver
+        - [ ] Editar
+        - [ ] Borrar
+      - [ ] Metas
+        - [ ] Añadir
+        - [ ] Editar
+        - [ ] Borrar
+      - [ ] Tareas
+        - [ ] Añadir
+        - [ ] Editar
+        - [ ] Marcar estado
+        - [ ] Borrar
 - [ ] Persistencia de la información
