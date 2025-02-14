@@ -8,7 +8,7 @@
         - [ ] Lista anidada (tareas)
     - [ ] Ver categoría
     - [ ] Editar categoría
-        - [ ] Diseño
+        - [x] Diseño
         - [ ] Lista de metas
     - [ ] Editar meta
     - [ ] Popup: editar tarea

@@ -37,3 +37,13 @@
 
 - Creado fragmento principal de editar categoría (no funcional actualmente)
 - Rediseños para ser funcional en el modo oscuro
+
+## V14/02/2025
+
+- Añadido adaptador del RecyclerView para editar categoría, metas se reciben de la categoría original
+    - No carga las metas propiamente, hay que comprobar por qué ocurre esto
+    - SOLUCIONADO: me faltaba añadir el layoutmanager
+- Creado layout de la lista de metas en editar categoría, igual estaría bien añadir formas de reordenar pero igual es muy complicado
+- PARA HACER:
+    - poner los datos propios
+    - ajustar el padding en el recyclerview

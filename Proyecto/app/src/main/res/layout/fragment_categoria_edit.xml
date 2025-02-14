@@ -5,21 +5,21 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoriaEditFragment">
+    tools:context=".categoria_edit.CategoriaEditFragment">
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="729dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/editCatNombre"
                 style="@style/Widget.AppCompat.EditText"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="Nombre de la categoría"
@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/editCatDescripcion"
                 style="@style/Widget.AppCompat.EditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Descripción"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+                app:layout_constraintTop_toBottomOf="@+id/editCatNombre" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -74,9 +74,10 @@
                 android:layout_marginTop="16dp"
                 android:text="Metas"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editTextText2" />
+                app:layout_constraintTop_toBottomOf="@id/editCatDescripcion" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listaEditCat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

@@ -1,7 +1,6 @@
-package me.jorgemoreno.whattodo;
+package me.jorgemoreno.whattodo.categoria_edit;
 
 import android.os.Bundle;
-import android.view.Menu;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,36 +12,33 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity {
+import me.jorgemoreno.whattodo.R;
+
+public class CategoriaEditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_categoria_edit);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbarMain);
+        Toolbar toolbar = findViewById(R.id.toolbarCatEdit);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fmgr = getSupportFragmentManager();
         FragmentTransaction trans = fmgr.beginTransaction();
 
-        Fragment main = new MainFragment();
-        trans.replace(R.id.fragMain, main);
+        Fragment catEdit = new CategoriaEditFragment();
+        catEdit.setArguments(getIntent().getExtras());
+        trans.replace(R.id.fragCatEdit, catEdit);
 
         trans.commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return true;
     }
 }

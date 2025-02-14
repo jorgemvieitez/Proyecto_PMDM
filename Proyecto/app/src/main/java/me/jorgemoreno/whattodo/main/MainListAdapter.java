@@ -1,4 +1,4 @@
-package me.jorgemoreno.whattodo;
+package me.jorgemoreno.whattodo.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,15 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import me.jorgemoreno.whattodo.R;
+import me.jorgemoreno.whattodo.categoria_edit.CategoriaEditActivity;
 import me.jorgemoreno.whattodo.data.Categoria;
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
@@ -37,12 +37,12 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Categoria valor = datos.get(position);
-        holder.getTitulo().setText(valor.getNombre());
+        holder.valor = datos.get(position);
+        holder.getTitulo().setText(holder.valor.getNombre());
 
         context = holder.itemView.getContext();
 
-        if (valor.isCollapsed()) {
+        if (holder.valor.isCollapsed()) {
             holder.getCollapse().setBackground(AppCompatResources.getDrawable(context, R.drawable.chevron_right));
         }
     }
@@ -53,11 +53,9 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     }
 
     public void onClickCollapse(@NonNull ViewHolder holder, int position) {
-        Categoria valor = datos.get(position);
+        boolean collapsed = !holder.valor.isCollapsed();
 
-        boolean collapsed = !valor.isCollapsed();
-
-        valor.setCollapsed(collapsed);
+        holder.valor.setCollapsed(collapsed);
         if (collapsed) {
             holder.getCollapse().setBackground(AppCompatResources.getDrawable(context, R.drawable.chevron_right));
             holder.getLista().setVisibility(View.GONE);
@@ -68,6 +66,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        Categoria valor;
         private final TextView titulo;
         private final ImageButton collapse;
         private final ImageButton menu;
@@ -91,6 +90,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                 popupMenu.setOnMenuItemClickListener((item) -> {
                     if (item.getItemId() == R.id.menu_list_editar) {
                         Intent i = new Intent(parent.context, CategoriaEditActivity.class);
+                        i.putExtra("categoria", getAdapterPosition());
                         parent.context.startActivity(i);
                     }
                     return true;
