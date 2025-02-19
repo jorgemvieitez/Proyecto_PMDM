@@ -57,3 +57,4 @@
     - El fragmento en la MainActivity se reinicia al volver, para poder actualizar los datos
 - Creada una mínima "descripción de categoría", que si tengo tiempo cambiaré por un RecyclerView propiamente montado
 - Arreglados los divisores en la lista de la actividad principal - ni me había dado cuenta de que los había puesto mal
+- TODAVÍA TENGO QUE CREAR UN ESTILO PARA LOS FAB, que use los colores de acento
