@@ -8,11 +8,11 @@ import me.jorgemoreno.whattodo.data.Meta;
 
 public class Global {
     public static ArrayList<Categoria> datos = new ArrayList<>(Arrays.asList(
-            new Categoria("test1", new ArrayList<>(Arrays.asList(
+            new Categoria("test1", "Hola", new ArrayList<>(Arrays.asList(
                     new Meta("test1.a"),
                     new Meta("test1.b")
             ))),
-            new Categoria("test2",new ArrayList<>(Arrays.asList(
+            new Categoria("test2", "Adiós",new ArrayList<>(Arrays.asList(
                     new Meta("test2.a"),
                     new Meta("test2.b")
             ))),

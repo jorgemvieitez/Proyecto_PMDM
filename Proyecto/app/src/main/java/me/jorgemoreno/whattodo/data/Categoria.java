@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 public class Categoria implements Serializable {
     private String nombre;
+    private String descripcion = "";
     private boolean isCollapsed = false;
     private ArrayList<Meta> metas;
 
@@ -14,8 +15,14 @@ public class Categoria implements Serializable {
         this.metas = new ArrayList<>();
     }
 
-    public Categoria(String nombre, ArrayList<Meta> metas) {
+    public Categoria(String nombre, String descripcion) {
+        this(nombre);
+        this.descripcion = descripcion;
+    }
+
+    public Categoria(String nombre, String descripcion, ArrayList<Meta> metas) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.metas = metas;
     }
 
@@ -25,6 +32,14 @@ public class Categoria implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public boolean isCollapsed() {
@@ -51,5 +66,9 @@ public class Categoria implements Serializable {
 
     public int getMetaCount() {
         return metas.size();
+    }
+
+    public Meta getMetaAt(int pos) {
+        return metas.get(pos);
     }
 }

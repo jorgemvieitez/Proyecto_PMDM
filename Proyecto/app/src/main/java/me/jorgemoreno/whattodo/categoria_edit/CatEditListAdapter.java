@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,8 +32,10 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CatEditListAdapter.ViewHolder holder, int position) {
-        holder.valor = datos.getMetas().skip(position).findFirst().orElseThrow();
+        holder.valor = datos.getMetaAt(position);
         context = holder.itemView.getContext();
+
+        holder.nombre.setText(holder.valor.getNombre());
     }
 
     @Override
@@ -41,9 +45,16 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         Meta valor;
+        TextView nombre;
+        ImageButton editar;
+        ImageButton borrar;
 
         public ViewHolder(@NonNull View view, CatEditListAdapter parent) {
             super(view);
+
+            nombre = view.findViewById(R.id.nombre);
+            editar = view.findViewById(R.id.editMeta);
+            borrar = view.findViewById(R.id.deleteMeta);
         }
     }
 }

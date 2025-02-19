@@ -34,7 +34,7 @@ public class MainFragment extends Fragment {
         RecyclerView listaMain = view.findViewById(R.id.listaMain);
         listaMain.setLayoutManager(new LinearLayoutManager(this.getContext()));
         listaMain.setAdapter(adapter);
-        listaMain.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
+        listaMain.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         FloatingActionButton fab = view.findViewById(R.id.floatingActionButton);
         fab.setOnClickListener((v) -> {

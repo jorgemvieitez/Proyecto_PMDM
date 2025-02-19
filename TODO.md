@@ -9,6 +9,7 @@
     - [ ] Ver categoría
     - [ ] Editar categoría
         - [x] Diseño
+        - [x] Editar los datos de la categoría
         - [ ] Lista de metas
     - [ ] Editar meta
     - [ ] Popup: editar tarea
@@ -18,7 +19,7 @@
     - [ ] Categorías
         - [ ] Crear
         - [ ] Ver
-        - [ ] Editar
+        - [x] Editar
         - [ ] Borrar
       - [ ] Metas
         - [ ] Añadir

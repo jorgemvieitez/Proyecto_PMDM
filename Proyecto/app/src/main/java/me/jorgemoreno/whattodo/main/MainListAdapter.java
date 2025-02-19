@@ -14,10 +14,12 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.categoria_edit.CategoriaEditActivity;
 import me.jorgemoreno.whattodo.data.Categoria;
+import me.jorgemoreno.whattodo.data.Meta;
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
     ArrayList<Categoria> datos;
@@ -37,10 +39,19 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        context = holder.itemView.getContext();
         holder.valor = datos.get(position);
+
         holder.getTitulo().setText(holder.valor.getNombre());
 
-        context = holder.itemView.getContext();
+        // TODO: recyclerview
+        String texto = datos.get(position).getMetas().map(meta ->
+            "* " + meta.getNombre()).collect(Collectors.joining("\n")
+        );
+        if (texto == "")
+            holder.getLista().setText("(No hay metas)");
+        else
+            holder.getLista().setText(texto);
 
         if (holder.valor.isCollapsed()) {
             holder.getCollapse().setBackground(AppCompatResources.getDrawable(context, R.drawable.chevron_right));
@@ -70,7 +81,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         private final TextView titulo;
         private final ImageButton collapse;
         private final ImageButton menu;
-        private final View lista; //TODO: convertir a RecyclerView
+        private final TextView lista; //TODO: convertir a RecyclerView
 
         public ViewHolder(@NonNull View view, MainListAdapter parent) {
             super(view);
@@ -112,7 +123,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         }
 
         //TODO: convertir a RecyclerView
-        public View getLista() {
+        public TextView getLista() {
             return lista;
         }
     }

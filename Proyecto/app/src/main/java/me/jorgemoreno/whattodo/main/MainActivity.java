@@ -35,7 +35,20 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        FragmentManager fmgr = getSupportFragmentManager();
+        FragmentTransaction trans = fmgr.beginTransaction();
 
+        main = new MainFragment();
+        trans.replace(R.id.fragMain, main);
+
+        trans.commit();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // Reconstruir el fragmento por si los datos han sido editados
         FragmentManager fmgr = getSupportFragmentManager();
         FragmentTransaction trans = fmgr.beginTransaction();
 
