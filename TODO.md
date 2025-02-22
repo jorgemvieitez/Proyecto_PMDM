@@ -6,7 +6,7 @@
         - [x] Diseño
         - [x] Lista principal (categorías)
         - [ ] Lista anidada (tareas)
-    - [ ] Ver categoría
+    - [ ] ~~Ver categoría~~
     - [ ] Editar categoría
         - [x] Diseño
         - [x] Editar los datos de la categoría
@@ -18,9 +18,9 @@
 - [ ] Implementación de la funcionalidad
     - [ ] Categorías
         - [ ] Crear
-        - [ ] Ver
+        - [ ] ~~Ver~~
         - [x] Editar
-        - [ ] Borrar
+        - [x] Borrar
       - [ ] Metas
         - [ ] Añadir
         - [ ] Editar

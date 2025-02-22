@@ -8,7 +8,7 @@ public class Categoria implements Serializable {
     private String nombre;
     private String descripcion = "";
     private boolean isCollapsed = false;
-    private ArrayList<Meta> metas;
+    private final ArrayList<Meta> metas;
 
     public Categoria(String nombre) {
         this.nombre = nombre;
@@ -49,8 +49,6 @@ public class Categoria implements Serializable {
     public void setCollapsed(boolean collapsed) {
         isCollapsed = collapsed;
     }
-
-    // APIs para las metas están hechas para después poder aplicar ORM
 
     public Stream<Meta> getMetas() {
         return metas.stream();

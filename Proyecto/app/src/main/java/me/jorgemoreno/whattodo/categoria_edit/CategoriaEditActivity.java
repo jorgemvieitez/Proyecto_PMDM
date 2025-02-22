@@ -1,5 +1,6 @@
 package me.jorgemoreno.whattodo.categoria_edit;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import me.jorgemoreno.whattodo.R;
+import me.jorgemoreno.whattodo.main.MainActivity;
 
 public class CategoriaEditActivity extends AppCompatActivity {
 
@@ -40,5 +42,12 @@ public class CategoriaEditActivity extends AppCompatActivity {
         trans.replace(R.id.fragCatEdit, catEdit);
 
         trans.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finish();
     }
 }

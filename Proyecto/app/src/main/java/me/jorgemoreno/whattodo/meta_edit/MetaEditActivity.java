@@ -1,7 +1,6 @@
-package me.jorgemoreno.whattodo.main;
+package me.jorgemoreno.whattodo.meta_edit;
 
 import android.os.Bundle;
-import android.view.Menu;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,55 +8,44 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.util.ArrayList;
-
-import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
-import me.jorgemoreno.whattodo.data.Categoria;
 
-public class MainActivity extends AppCompatActivity {
-    MainFragment main;
+public class MetaEditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_categoria_edit);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbarMain);
+        Toolbar toolbar = findViewById(R.id.toolbarCatEdit);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fmgr = getSupportFragmentManager();
         FragmentTransaction trans = fmgr.beginTransaction();
 
-        main = new MainFragment();
-        trans.replace(R.id.fragMain, main);
+        Fragment catEdit = new MetaEditFragment();
+        catEdit.setArguments(getIntent().getExtras());
+        trans.replace(R.id.fragCatEdit, catEdit);
 
         trans.commit();
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    public void onBackPressed() {
+        super.onBackPressed();
 
-        if (Global.cat_modificada != null) {
-            main.adapter.notifyItemChanged(Global.cat_modificada);
-            Global.cat_modificada = null;
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
-        return true;
+        finish();
     }
 }

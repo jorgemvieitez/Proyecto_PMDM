@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,12 +22,15 @@ import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.categoria_edit.CategoriaEditActivity;
 import me.jorgemoreno.whattodo.data.Categoria;
 import me.jorgemoreno.whattodo.data.Meta;
+import me.jorgemoreno.whattodo.dialogos.YesNo;
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder> {
     ArrayList<Categoria> datos;
+    Fragment parent;
     Context context;
 
-    public MainListAdapter(ArrayList<Categoria> datos) {
+    public MainListAdapter(Fragment parent, ArrayList<Categoria> datos) {
+        this.parent = parent;
         this.datos = datos;
     }
 
@@ -39,7 +44,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        context = holder.itemView.getContext();
+        context = parent.getContext();
         holder.valor = datos.get(position);
 
         holder.getTitulo().setText(holder.valor.getNombre());
@@ -103,6 +108,17 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                         Intent i = new Intent(parent.context, CategoriaEditActivity.class);
                         i.putExtra("categoria", getAdapterPosition());
                         parent.context.startActivity(i);
+                    } else if (item.getItemId() == R.id.menu_list_borrar) {
+                        YesNo dialogo = new YesNo(
+                                "¿Borrar esta categoría?",
+                                "¿Seguro que quieres borrar esta categoría?",
+                                (dialog, which) -> {
+                                    parent.datos.remove(valor);
+                                    Toast.makeText(parent.context, "Categoría borrada", Toast.LENGTH_SHORT).show();
+                                    parent.notifyItemRemoved(getAdapterPosition());
+                                    },
+                                (dialog, which) -> {});
+                        dialogo.show(parent.parent.getActivity().getSupportFragmentManager(), "borrar");
                     }
                     return true;
                 });

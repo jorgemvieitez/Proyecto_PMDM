@@ -58,3 +58,13 @@
 - Creada una mínima "descripción de categoría", que si tengo tiempo cambiaré por un RecyclerView propiamente montado
 - Arreglados los divisores en la lista de la actividad principal - ni me había dado cuenta de que los había puesto mal
 - TODAVÍA TENGO QUE CREAR UN ESTILO PARA LOS FAB, que use los colores de acento
+
+## S22/02/2025
+
+- Añadida funcionalidad de crear y borrar categorías
+- Mejorada la UX a la hora de editar categorías y volver a la actividad principal
+- Eliminado botón de ver categoría por scope creep
+- Añadidas tareas a los modelos
+- Añadidos fundamentos de la base de datos SQLite
+- Setup para la última actividad (que no ha sido cancelada por scope creep) - que es básicamente una copia del CategoriaEdit
+    - Aún necesito añadir funcionalidad de prácticamente todo en esta actividad - está todo super roto

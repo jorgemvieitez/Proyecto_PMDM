@@ -17,6 +17,10 @@
             android:exported="false"
             android:parentActivityName=".main.MainActivity"/>
         <activity
+            android:name=".meta_edit.MetaEditActivity"
+            android:exported="false"
+            android:parentActivityName=".categoria_edit.CategoriaEditActivity"/>
+        <activity
             android:name=".main.MainActivity"
             android:exported="true">
             <intent-filter>
