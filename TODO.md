@@ -7,27 +7,40 @@
         - [x] Lista principal (categorías)
         - [ ] Lista anidada (tareas)
     - [ ] ~~Ver categoría~~
-    - [ ] Editar categoría
+    - [x] Editar categoría
         - [x] Diseño
         - [x] Editar los datos de la categoría
-        - [ ] Lista de metas
-    - [ ] Editar meta
-    - [ ] Popup: editar tarea
-    - [ ] Menús
-    - [ ] Versiones horizontales
+        - [x] Lista de metas
+    - [x] Editar meta
+        - [x] Diseño
+        - [x] Editar los datos de la meta
+        - [x] Lista de tareas
+    - [ ] ~~Popup: editar tarea~~
+    - [x] Menús
+        - [x] Menú principal
+        - [x] Menú categoría
+    - [ ] ~~Versiones horizontales~~
+    - [ ] Ajustes
 - [ ] Implementación de la funcionalidad
-    - [ ] Categorías
-        - [ ] Crear
+    - [x] Categorías
+        - [x] Crear
         - [ ] ~~Ver~~
         - [x] Editar
         - [x] Borrar
-      - [ ] Metas
-        - [ ] Añadir
-        - [ ] Editar
-        - [ ] Borrar
-      - [ ] Tareas
-        - [ ] Añadir
-        - [ ] Editar
-        - [ ] Marcar estado
-        - [ ] Borrar
+    - [x] Metas
+        - [x] Añadir
+        - [x] Editar
+        - [x] Borrar
+    - [ ] Tareas
+        - [x] Añadir
+        - [ ] Editar / marcar estado
+        - [x] Borrar
+    - [ ] Ajustes
+        - [ ] \*clapping\*
 - [ ] Persistencia de la información
+    - [x] Generar BBDD
+    - [ ] Recibir y almacenar información
+    - [ ] Actualizar BBDD??
+- [ ] Últimos retoques
+    - [ ] Mover todos los strings a strings.txt lol
+    - [ ] Eliminar Global.datos y usar la BBDD directamente...?

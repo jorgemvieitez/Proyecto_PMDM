@@ -10,7 +10,12 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
+    <style name="Widget.Proyecto.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">?colorAccent</item>
+    </style>
+
     <style name="Theme.Proyecto" parent="Base.Theme.Proyecto">
+        <item name="floatingActionButtonPrimaryStyle">@style/Widget.Proyecto.FloatingActionButton</item>
         <item name="toolbarStyle">@style/Theme.Proyecto.Toolbar</item>
     </style>
 </resources>

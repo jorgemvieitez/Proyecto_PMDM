@@ -20,14 +20,14 @@ public class MetaEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_categoria_edit);
+        setContentView(R.layout.activity_meta_edit);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbarCatEdit);
+        Toolbar toolbar = findViewById(R.id.toolbarMetaEdit);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -37,7 +37,7 @@ public class MetaEditActivity extends AppCompatActivity {
 
         Fragment catEdit = new MetaEditFragment();
         catEdit.setArguments(getIntent().getExtras());
-        trans.replace(R.id.fragCatEdit, catEdit);
+        trans.replace(R.id.fragMetaEdit, catEdit);
 
         trans.commit();
     }

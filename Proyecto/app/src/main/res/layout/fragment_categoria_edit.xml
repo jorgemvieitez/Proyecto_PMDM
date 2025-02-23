@@ -86,13 +86,28 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/border_thingy"
                 android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/nuevaMeta"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+            <ImageButton
+                android:id="@+id/nuevaMeta"
+                android:layout_width="56dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/chip_border"
+                android:backgroundTint="?colorPrimary"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:src="@drawable/plus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/listaEditCat"
+                app:layout_constraintTop_toBottomOf="@+id/listaEditCat" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

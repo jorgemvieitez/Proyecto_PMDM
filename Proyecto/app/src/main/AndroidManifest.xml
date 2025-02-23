@@ -15,13 +15,16 @@
         <activity
             android:name=".categoria_edit.CategoriaEditActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:parentActivityName=".main.MainActivity"/>
         <activity
             android:name=".meta_edit.MetaEditActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:parentActivityName=".categoria_edit.CategoriaEditActivity"/>
         <activity
             android:name=".main.MainActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -14,8 +14,14 @@ public class Meta implements Serializable {
         tareas = new ArrayList<>();
     }
 
-    public Meta(String nombre, ArrayList<Tarea> tareas) {
+    public Meta(String nombre, String descripcion) {
+        this(nombre);
+        this.descripcion = descripcion;
+    }
+
+    public Meta(String nombre, String descripcion, ArrayList<Tarea> tareas) {
         this.nombre = nombre;
+        this.descripcion = descripcion;
         this.tareas = tareas;
     }
 

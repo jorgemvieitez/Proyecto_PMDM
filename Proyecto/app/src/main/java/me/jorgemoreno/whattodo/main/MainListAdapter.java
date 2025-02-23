@@ -111,7 +111,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                     } else if (item.getItemId() == R.id.menu_list_borrar) {
                         YesNo dialogo = new YesNo(
                                 "¿Borrar esta categoría?",
-                                "¿Seguro que quieres borrar esta categoría?",
+                                "¿Seguro que quieres borrar esta categoría? No podrás deshacer esto",
                                 (dialog, which) -> {
                                     parent.datos.remove(valor);
                                     Toast.makeText(parent.context, "Categoría borrada", Toast.LENGTH_SHORT).show();

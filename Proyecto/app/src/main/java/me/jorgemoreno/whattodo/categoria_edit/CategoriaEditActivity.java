@@ -13,10 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.main.MainActivity;
 
 public class CategoriaEditActivity extends AppCompatActivity {
+    CategoriaEditFragment catEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class CategoriaEditActivity extends AppCompatActivity {
         FragmentManager fmgr = getSupportFragmentManager();
         FragmentTransaction trans = fmgr.beginTransaction();
 
-        Fragment catEdit = new CategoriaEditFragment();
+        catEdit = new CategoriaEditFragment();
         catEdit.setArguments(getIntent().getExtras());
         trans.replace(R.id.fragCatEdit, catEdit);
 
@@ -49,5 +51,16 @@ public class CategoriaEditActivity extends AppCompatActivity {
         super.onBackPressed();
 
         finish();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        if (Global.meta_modificada != null) {
+            catEdit.adapter.notifyItemChanged(Global.meta_modificada);
+            Global.cat_modificada = catEdit.position;
+            Global.meta_modificada = null;
+        }
     }
 }

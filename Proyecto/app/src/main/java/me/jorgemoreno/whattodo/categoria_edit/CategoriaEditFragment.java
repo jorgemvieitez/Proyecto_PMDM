@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,6 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.data.Categoria;
+import me.jorgemoreno.whattodo.data.Meta;
+import me.jorgemoreno.whattodo.dialogos.CreateWithName;
 
 public class CategoriaEditFragment extends Fragment {
     Categoria cat;
@@ -31,7 +34,7 @@ public class CategoriaEditFragment extends Fragment {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt("categoria");
         cat = Global.datos.get(position);
-        adapter = new CatEditListAdapter(cat);
+        adapter = new CatEditListAdapter(cat, this);
     }
 
     @Override
@@ -52,13 +55,28 @@ public class CategoriaEditFragment extends Fragment {
         fab.setOnClickListener(v -> {
             cat.setNombre(nombre.getText().toString());
             cat.setDescripcion(descripcion.getText().toString());
-            Toast.makeText(getContext(), "Categoría actualizada", Toast.LENGTH_SHORT);
+            Toast.makeText(getContext(), "Categoría actualizada", Toast.LENGTH_SHORT).show();
 
             // no me apetece mirarme las APIs de result así que static globals here we go
             Global.cat_modificada = position;
 
             // TODO: may not be preferred if in horizontal?
             getActivity().finish();
+        });
+
+        ImageButton nuevaMeta = view.findViewById(R.id.nuevaMeta);
+        nuevaMeta.setOnClickListener((btn) -> {
+            CreateWithName dialogo = new CreateWithName(
+                    "Crear meta",
+                    "Elige el nombre de la meta",
+                    (name) -> {
+                        cat.addMeta(new Meta(name));
+                        adapter.notifyItemInserted(cat.getMetaCount() - 1);
+                        Global.cat_modificada = position;
+                    },
+                    (dialog, which) -> {}
+            );
+            dialogo.show(getActivity().getSupportFragmentManager(), "meta_crear");
         });
 
         // Inflate the layout for this fragment

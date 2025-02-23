@@ -68,3 +68,13 @@
 - Añadidos fundamentos de la base de datos SQLite
 - Setup para la última actividad (que no ha sido cancelada por scope creep) - que es básicamente una copia del CategoriaEdit
     - Aún necesito añadir funcionalidad de prácticamente todo en esta actividad - está todo super roto
+
+## D23/02/2025
+- Añadida funcionalidad de crear metas
+- Se pueden ver y editar los datos de las metas
+- Creado estilo para los FAB. Oh yeah
+- Creada lista de tareas - de momento se pueden borrar y añadir, pero no editar
+- Botón de borrar meta muestra un popup antes de borrar
+- Añadido `android:launchMode="singleTop"` a todas las actividades para que no se vuelvan a crear al pulsar el botón Up
+    - Esto evita un error al pulsar el botón Up en la Activity de editar metas, ya que la Activity de editar categorías necesita parámetros.
+    - Es posible que en un futuro necesitemos volver a crear las Activities anidadas (específicamente la de categorías), pero solucionar esta limitación es problema del yo del futuro

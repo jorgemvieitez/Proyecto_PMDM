@@ -1,25 +1,33 @@
 package me.jorgemoreno.whattodo.categoria_edit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.data.Categoria;
 import me.jorgemoreno.whattodo.data.Meta;
+import me.jorgemoreno.whattodo.dialogos.YesNo;
+import me.jorgemoreno.whattodo.meta_edit.MetaEditActivity;
 
 public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.ViewHolder> {
     Categoria datos;
     Context context;
+    Fragment parent;
 
-    public CatEditListAdapter(Categoria datos) {
+    public CatEditListAdapter(Categoria datos, Fragment parent) {
         this.datos = datos;
+        this.parent = parent;
     }
 
     @NonNull
@@ -55,6 +63,27 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
             nombre = view.findViewById(R.id.nombre);
             editar = view.findViewById(R.id.editMeta);
             borrar = view.findViewById(R.id.deleteMeta);
+
+            editar.setOnClickListener((__) -> {
+                Intent i = new Intent(parent.context, MetaEditActivity.class);
+                i.putExtra("categoria", Global.datos.indexOf(parent.datos));
+                i.putExtra("meta", getAdapterPosition());
+                parent.context.startActivity(i);
+            });
+
+            borrar.setOnClickListener((__) -> {
+                YesNo dialogo = new YesNo(
+                        "¿Borrar esta meta?",
+                        "¿Seguro que quieres borrar esta meta? No podrás deshacer esto.",
+                        (dialog, which) -> {
+                            parent.datos.removeMeta(valor);
+                            parent.notifyItemRemoved(getAdapterPosition());
+                            Toast.makeText(parent.context, "Meta borrada", Toast.LENGTH_SHORT).show();
+                            Global.cat_modificada = Global.datos.indexOf(parent.datos);
+                        },
+                        (dialog, which) -> {});
+                dialogo.show(parent.parent.getActivity().getSupportFragmentManager(), "borrar");
+            });
         }
     }
 }
