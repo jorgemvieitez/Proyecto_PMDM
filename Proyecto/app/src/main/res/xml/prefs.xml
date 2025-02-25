@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Preferencias de aplicación">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="aplauso"
+            android:summaryOff="No habrá ningún efecto de sonido"
+            android:summaryOn="Sonará un aplauso"
+            android:title="Aplaudir al completar una tarea" />
+    </PreferenceCategory>
+</PreferenceScreen>

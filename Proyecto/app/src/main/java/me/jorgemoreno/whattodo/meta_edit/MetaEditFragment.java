@@ -75,9 +75,20 @@ public class MetaEditFragment extends Fragment {
             meta.setDescripcion(descripcion.getText().toString());
 
             //TODO: actualizar datos de las tareas
+            int num_tareas = rv.getLayoutManager().getItemCount();
+            for (int i = 0; i < num_tareas; i++) {
+                Tarea t = meta.getTareaAt(i);
+                var vhOpt = adapter.getHolder(i);
+                if (vhOpt.isEmpty()) continue;
+                MetaEditListAdapter.ViewHolder vh = vhOpt.get();
+
+                t.setNombre(vh.nombre.getText().toString());
+                t.setCompletada(vh.checkBox.isChecked());
+            }
 
             Toast.makeText(getContext(), "Meta actualizada", Toast.LENGTH_SHORT).show();
             Global.meta_modificada = position[1];
+            Global.cat_modificada = position[0];
 
             // TODO: may not be preferred if in horizontal?
             getActivity().finish();

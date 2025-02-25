@@ -8,6 +8,9 @@
     <color name="accent">#00AB98</color>
     <color name="accent_background_light">#74E7D3</color>
     <color name="accent_background_dark">#005F56</color>
+    <color name="accent_background_light_greyed">#B6DCD6</color>
+    <color name="accent_background_dark_greyed">#1A3732</color>
 
     <attr name="accent_background" format="color" />
+    <attr name="accent_background_greyed" format="color" />
 </resources>

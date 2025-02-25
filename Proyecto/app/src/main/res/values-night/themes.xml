@@ -3,5 +3,6 @@
     <style name="Base.Theme.Proyecto" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_dark</item>
         <item name="accent_background">@color/accent_background_dark</item>
+        <item name="accent_background_greyed">@color/accent_background_dark_greyed</item>
     </style>
 </resources>

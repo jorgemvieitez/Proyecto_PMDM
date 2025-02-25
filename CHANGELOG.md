@@ -78,3 +78,10 @@
 - Añadido `android:launchMode="singleTop"` a todas las actividades para que no se vuelvan a crear al pulsar el botón Up
     - Esto evita un error al pulsar el botón Up en la Activity de editar metas, ya que la Activity de editar categorías necesita parámetros.
     - Es posible que en un futuro necesitemos volver a crear las Activities anidadas (específicamente la de categorías), pero solucionar esta limitación es problema del yo del futuro
+
+## M25/02/2025 (mañana)
+- Se pueden editar tareas
+    - Solucionado un error en el que el estado de la tarea no se veía reflejado al abrir la actividad
+- Añadida más funcionalidad de la BD: patrón singleton, insertar datos dados (quedan por añadir UPDATEs, INSERTs individuales, SELECTs, etc etc)
+- Creado fragmento de preferencias - falta linkearlo al menú y añadir la funcionalidad
+- Añadir forma de ver si la tarea está completada - si lo está, aparecerá con un tick en la actividad principal, y aparecerá más gris en la actividad de categoría

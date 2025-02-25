@@ -1,5 +1,6 @@
 package me.jorgemoreno.whattodo.main;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.data.Categoria;

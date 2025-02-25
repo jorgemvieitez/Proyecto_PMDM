@@ -2,6 +2,7 @@ package me.jorgemoreno.whattodo.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,13 +51,15 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         holder.getTitulo().setText(holder.valor.getNombre());
 
         // TODO: recyclerview
-        String texto = datos.get(position).getMetas().map(meta ->
-            "* " + meta.getNombre()).collect(Collectors.joining("\n")
-        );
+        String texto = "<ul>"  +datos.get(position).getMetas()
+            .map(
+                meta -> "<li> " + (meta.isCompletada() ? "✓ " : "") + meta.getNombre() + "</li>"
+            ).collect(Collectors.joining("\n"))
+                + "</ul>";
         if (texto == "")
             holder.getLista().setText("(No hay metas)");
         else
-            holder.getLista().setText(texto);
+            holder.getLista().setText(Html.fromHtml(texto, Html.FROM_HTML_MODE_COMPACT));
 
         if (holder.valor.isCollapsed()) {
             holder.getCollapse().setBackground(AppCompatResources.getDrawable(context, R.drawable.chevron_right));

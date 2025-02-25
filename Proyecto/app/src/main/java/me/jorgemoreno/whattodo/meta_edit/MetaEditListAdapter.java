@@ -1,24 +1,23 @@
 package me.jorgemoreno.whattodo.meta_edit;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import me.jorgemoreno.whattodo.Global;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.TreeMap;
+
 import me.jorgemoreno.whattodo.R;
-import me.jorgemoreno.whattodo.categoria_edit.CatEditListAdapter;
-import me.jorgemoreno.whattodo.data.Categoria;
 import me.jorgemoreno.whattodo.data.Meta;
 import me.jorgemoreno.whattodo.data.Tarea;
 import me.jorgemoreno.whattodo.dialogos.YesNo;
@@ -28,6 +27,8 @@ public class MetaEditListAdapter extends RecyclerView.Adapter<MetaEditListAdapte
     Context context;
     Fragment parent;
 
+    TreeMap<Integer, ViewHolder> holders = new TreeMap<>();
+
     public MetaEditListAdapter(Meta datos, Fragment parent) {
         this.datos = datos;
         this.parent = parent;
@@ -35,18 +36,26 @@ public class MetaEditListAdapter extends RecyclerView.Adapter<MetaEditListAdapte
 
     @NonNull
     @Override
-    public MetaEditListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_meta_edit, parent, false);
 
-        return new MetaEditListAdapter.ViewHolder(view, this);
+        return new ViewHolder(view, this);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MetaEditListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.valor = datos.getTareaAt(position);
         context = holder.itemView.getContext();
 
         holder.nombre.setText(holder.valor.getNombre());
+        holder.checkBox.setChecked(holder.valor.isCompletada());
+
+        holders.put(position, holder);
+    }
+
+    public Optional<ViewHolder> getHolder(int position) {
+        ViewHolder vh = holders.get(position);
+        return Optional.ofNullable(vh);
     }
 
     @Override

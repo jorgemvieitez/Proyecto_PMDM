@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class Categoria implements Serializable {
+    private Long id = null;
     private String nombre;
     private String descripcion = "";
     private boolean isCollapsed = false;
@@ -24,6 +25,14 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.metas = metas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombre() {

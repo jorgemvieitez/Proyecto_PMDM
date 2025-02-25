@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class Meta implements Serializable {
+    private Long id = null;
     private String nombre;
     private String descripcion;
     private final ArrayList<Tarea> tareas;
@@ -23,6 +24,24 @@ public class Meta implements Serializable {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tareas = tareas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isCompletada() {
+        if (this.tareas.isEmpty()) return false;
+
+        for (Tarea t: tareas) {
+            if (!t.isCompletada()) return false;
+        }
+
+        return true;
     }
 
     public String getNombre() {

@@ -31,9 +31,9 @@
         - [x] Añadir
         - [x] Editar
         - [x] Borrar
-    - [ ] Tareas
+    - [x] Tareas
         - [x] Añadir
-        - [ ] Editar / marcar estado
+        - [x] Editar / marcar estado
         - [x] Borrar
     - [ ] Ajustes
         - [ ] \*clapping\*

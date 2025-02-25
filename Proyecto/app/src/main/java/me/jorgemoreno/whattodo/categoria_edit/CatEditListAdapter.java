@@ -71,6 +71,9 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
                 parent.context.startActivity(i);
             });
 
+            //TODO: haz que funcione
+            //view.setBackgroundTintList(parent.context.getResources().getColorStateList(R.color.accent_background_light_greyed, parent.context.getTheme()));
+
             borrar.setOnClickListener((__) -> {
                 YesNo dialogo = new YesNo(
                         "¿Borrar esta meta?",
