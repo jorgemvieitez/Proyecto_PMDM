@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.categoria_edit.CategoriaEditActivity;
 import me.jorgemoreno.whattodo.data.Categoria;
@@ -38,6 +39,8 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // generating this at the time of constructing causes it to be null apparently
+        if (this.context == null) this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_main, parent, false);
 
         return new ViewHolder(view, this);
@@ -45,21 +48,18 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        context = parent.getContext();
         holder.valor = datos.get(position);
 
         holder.getTitulo().setText(holder.valor.getNombre());
 
-        // TODO: recyclerview
-        String texto = "<ul>"  +datos.get(position).getMetas()
+        String texto = datos.get(position).getMetas()
             .map(
-                meta -> "<li> " + (meta.isCompletada() ? "✓ " : "") + meta.getNombre() + "</li>"
-            ).collect(Collectors.joining("\n"))
-                + "</ul>";
+                meta -> "⇛ " + (meta.isCompletada() ? "✓ " : "") + meta.getNombre()
+            ).collect(Collectors.joining("\n"));
         if (texto == "")
             holder.getLista().setText("(No hay metas)");
         else
-            holder.getLista().setText(Html.fromHtml(texto, Html.FROM_HTML_MODE_COMPACT));
+            holder.getLista().setText(texto);
 
         if (holder.valor.isCollapsed()) {
             holder.getCollapse().setBackground(AppCompatResources.getDrawable(context, R.drawable.chevron_right));
@@ -119,6 +119,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
                                     parent.datos.remove(valor);
                                     Toast.makeText(parent.context, "Categoría borrada", Toast.LENGTH_SHORT).show();
                                     parent.notifyItemRemoved(getAdapterPosition());
+                                    BaseDatos.deleteCategoria(BaseDatos.getInstance().getWritableDatabase(), valor);
                                     },
                                 (dialog, which) -> {});
                         dialogo.show(parent.parent.getActivity().getSupportFragmentManager(), "borrar");

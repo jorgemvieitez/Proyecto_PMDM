@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.data.Categoria;
@@ -33,6 +34,8 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
     @NonNull
     @Override
     public CatEditListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // generating this at the time of constructing causes it to be null apparently
+        if (this.context == null) this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_categoria_edit, parent, false);
 
         return new ViewHolder(view, this);
@@ -41,9 +44,20 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
     @Override
     public void onBindViewHolder(@NonNull CatEditListAdapter.ViewHolder holder, int position) {
         holder.valor = datos.getMetaAt(position);
-        context = holder.itemView.getContext();
 
-        holder.nombre.setText(holder.valor.getNombre());
+        if (holder.valor.isCompletada()) {
+            holder.itemView.setBackgroundTintList(
+                context.getResources().getColorStateList(
+                    R.color.accent_background_light_greyed,
+                    context.getTheme()
+                )
+            );
+
+            holder.nombre.setText("✓ " + holder.valor.getNombre());
+        } else {
+            holder.nombre.setText(holder.valor.getNombre());
+        }
+
     }
 
     @Override
@@ -66,13 +80,10 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
 
             editar.setOnClickListener((__) -> {
                 Intent i = new Intent(parent.context, MetaEditActivity.class);
-                i.putExtra("categoria", Global.datos.indexOf(parent.datos));
+                i.putExtra("categoria", Global.getDatos().indexOf(parent.datos));
                 i.putExtra("meta", getAdapterPosition());
                 parent.context.startActivity(i);
             });
-
-            //TODO: haz que funcione
-            //view.setBackgroundTintList(parent.context.getResources().getColorStateList(R.color.accent_background_light_greyed, parent.context.getTheme()));
 
             borrar.setOnClickListener((__) -> {
                 YesNo dialogo = new YesNo(
@@ -81,8 +92,9 @@ public class CatEditListAdapter extends RecyclerView.Adapter<CatEditListAdapter.
                         (dialog, which) -> {
                             parent.datos.removeMeta(valor);
                             parent.notifyItemRemoved(getAdapterPosition());
+                            BaseDatos.deleteMeta(BaseDatos.getInstance().getWritableDatabase(), valor);
                             Toast.makeText(parent.context, "Meta borrada", Toast.LENGTH_SHORT).show();
-                            Global.cat_modificada = Global.datos.indexOf(parent.datos);
+                            Global.cat_modificada = Global.getDatos().indexOf(parent.datos);
                         },
                         (dialog, which) -> {});
                 dialogo.show(parent.parent.getActivity().getSupportFragmentManager(), "borrar");

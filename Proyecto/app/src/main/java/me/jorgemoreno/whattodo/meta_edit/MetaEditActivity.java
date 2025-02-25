@@ -12,12 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.R;
+import me.jorgemoreno.whattodo.main.MainActivity;
 
 public class MetaEditActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MainActivity.dbMgr = BaseDatos.getInstance(this, "datos.db", null, 1);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_meta_edit);

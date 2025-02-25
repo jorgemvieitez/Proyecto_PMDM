@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.categoria_edit.CatEditListAdapter;
@@ -35,7 +36,7 @@ public class MetaEditFragment extends Fragment {
         super.onCreate(savedInstanceState);
         position[0] = getArguments().getInt("categoria");
         position[1] = getArguments().getInt("meta");
-        meta = Global.datos.get(position[0]).getMetaAt(position[1]);
+        meta = Global.getDatos().get(position[0]).getMetaAt(position[1]);
         adapter = new MetaEditListAdapter(meta, this);
     }
 
@@ -60,8 +61,11 @@ public class MetaEditFragment extends Fragment {
                     "Elige el nombre de la tarea",
                     (name) -> {
                         //TODO: hacer esto temporal o añadir un mensaje que indique que se crea en el momento
-                        meta.addTarea(new Tarea(name));
+                        Tarea tarea = new Tarea(name);
+                        meta.addTarea(tarea);
+
                         adapter.notifyItemInserted(meta.getTareaCount() - 1);
+                        BaseDatos.crearTarea(BaseDatos.getInstance().getWritableDatabase(), tarea, meta.getId());
                         Global.meta_modificada = position[1];
                     },
                     (dialog, which) -> {}
@@ -73,8 +77,9 @@ public class MetaEditFragment extends Fragment {
         fab.setOnClickListener(v -> {
             meta.setNombre(nombre.getText().toString());
             meta.setDescripcion(descripcion.getText().toString());
+            BaseDatos.updateMeta(BaseDatos.getInstance().getWritableDatabase(), meta);
 
-            //TODO: actualizar datos de las tareas
+            //actualizar datos de las tareas
             int num_tareas = rv.getLayoutManager().getItemCount();
             for (int i = 0; i < num_tareas; i++) {
                 Tarea t = meta.getTareaAt(i);
@@ -84,6 +89,8 @@ public class MetaEditFragment extends Fragment {
 
                 t.setNombre(vh.nombre.getText().toString());
                 t.setCompletada(vh.checkBox.isChecked());
+
+                BaseDatos.updateTarea(BaseDatos.getInstance().getWritableDatabase(), t);
             }
 
             Toast.makeText(getContext(), "Meta actualizada", Toast.LENGTH_SHORT).show();

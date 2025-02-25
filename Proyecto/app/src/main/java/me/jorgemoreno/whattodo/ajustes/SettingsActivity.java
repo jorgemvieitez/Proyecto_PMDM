@@ -1,6 +1,5 @@
-package me.jorgemoreno.whattodo.categoria_edit;
+package me.jorgemoreno.whattodo.ajustes;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -13,27 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import me.jorgemoreno.whattodo.BaseDatos;
-import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
-import me.jorgemoreno.whattodo.main.MainActivity;
+import me.jorgemoreno.whattodo.main.MainFragment;
 
-public class CategoriaEditActivity extends AppCompatActivity {
-    CategoriaEditFragment catEdit;
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity.dbMgr = BaseDatos.getInstance(this, "datos.db", null, 1);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_categoria_edit);
+        setContentView(R.layout.activity_settings);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbarCatEdit);
+        Toolbar toolbar = findViewById(R.id.toolbarAjustes);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,28 +36,9 @@ public class CategoriaEditActivity extends AppCompatActivity {
         FragmentManager fmgr = getSupportFragmentManager();
         FragmentTransaction trans = fmgr.beginTransaction();
 
-        catEdit = new CategoriaEditFragment();
-        catEdit.setArguments(getIntent().getExtras());
-        trans.replace(R.id.fragCatEdit, catEdit);
+        Fragment fragment = new SettingsFragment();
+        trans.replace(R.id.fragSettings, fragment);
 
         trans.commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        finish();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-
-        if (Global.meta_modificada != null) {
-            catEdit.adapter.notifyItemChanged(Global.meta_modificada);
-            Global.cat_modificada = catEdit.position;
-            Global.meta_modificada = null;
-        }
     }
 }

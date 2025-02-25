@@ -1,6 +1,5 @@
 package me.jorgemoreno.whattodo.categoria_edit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.data.Categoria;
@@ -33,7 +33,7 @@ public class CategoriaEditFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt("categoria");
-        cat = Global.datos.get(position);
+        cat = Global.getDatos().get(position);
         adapter = new CatEditListAdapter(cat, this);
     }
 
@@ -56,6 +56,7 @@ public class CategoriaEditFragment extends Fragment {
             cat.setNombre(nombre.getText().toString());
             cat.setDescripcion(descripcion.getText().toString());
             Toast.makeText(getContext(), "Categoría actualizada", Toast.LENGTH_SHORT).show();
+            BaseDatos.updateCategoria(BaseDatos.getInstance().getWritableDatabase(), cat);
 
             // no me apetece mirarme las APIs de result así que static globals here we go
             Global.cat_modificada = position;
@@ -70,8 +71,10 @@ public class CategoriaEditFragment extends Fragment {
                     "Crear meta",
                     "Elige el nombre de la meta",
                     (name) -> {
-                        cat.addMeta(new Meta(name));
+                        Meta meta = new Meta(name);
+                        cat.addMeta(meta);
                         adapter.notifyItemInserted(cat.getMetaCount() - 1);
+                        BaseDatos.crearMeta(BaseDatos.getInstance().getWritableDatabase(), meta, cat.getId());
                         Global.cat_modificada = position;
                     },
                     (dialog, which) -> {}

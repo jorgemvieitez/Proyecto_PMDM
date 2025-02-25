@@ -1,11 +1,11 @@
 - [x] Crear mockup
     - [x] Mockup básico
     - [x] Mockup de todas las pantallas
-- [ ] Diseñar e implementar en AS
-    - [ ] Página principal
+- [x] Diseñar e implementar en AS
+    - [x] Página principal
         - [x] Diseño
         - [x] Lista principal (categorías)
-        - [ ] Lista anidada (tareas)
+        - [x] Lista anidada (tareas)
     - [ ] ~~Ver categoría~~
     - [x] Editar categoría
         - [x] Diseño
@@ -20,8 +20,8 @@
         - [x] Menú principal
         - [x] Menú categoría
     - [ ] ~~Versiones horizontales~~
-    - [ ] Ajustes
-- [ ] Implementación de la funcionalidad
+    - [x] Ajustes
+- [x] Implementación de la funcionalidad
     - [x] Categorías
         - [x] Crear
         - [ ] ~~Ver~~
@@ -35,12 +35,12 @@
         - [x] Añadir
         - [x] Editar / marcar estado
         - [x] Borrar
-    - [ ] Ajustes
-        - [ ] \*clapping\*
-- [ ] Persistencia de la información
+    - [x] Ajustes
+        - [x] \*clapping\*
+- [x] Persistencia de la información
     - [x] Generar BBDD
-    - [ ] Recibir y almacenar información
-    - [ ] Actualizar BBDD??
+    - [x] Recibir información
+    - [x] Almacenar información
 - [ ] Últimos retoques
     - [ ] Mover todos los strings a strings.txt lol
-    - [ ] Eliminar Global.datos y usar la BBDD directamente...?
+    - [ ] ~~Eliminar Global.datos y usar la BBDD directamente...?~~

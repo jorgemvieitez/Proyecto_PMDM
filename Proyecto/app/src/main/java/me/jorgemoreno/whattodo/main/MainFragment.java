@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.data.Categoria;
@@ -25,7 +26,7 @@ public class MainFragment extends Fragment {
     MainListAdapter adapter;
 
     public MainFragment() {
-        adapter = new MainListAdapter(this, Global.datos);
+        adapter = new MainListAdapter(this, Global.getDatos());
     }
 
     @Override
@@ -43,8 +44,10 @@ public class MainFragment extends Fragment {
                     "Crear categoría",
                     "Elige el nombre de la categoría",
                     (name) -> {
-                        Global.datos.add(new Categoria(name));
-                        adapter.notifyItemInserted(Global.datos.size() - 1);
+                        Categoria cat = new Categoria(name);
+                        Global.getDatos().add(cat);
+                        adapter.notifyItemInserted( Global.getDatos().size() - 1 );
+                        BaseDatos.crearCategoria(BaseDatos.getInstance().getWritableDatabase(), cat);
                     },
                     (dialog, which) -> {}
             );

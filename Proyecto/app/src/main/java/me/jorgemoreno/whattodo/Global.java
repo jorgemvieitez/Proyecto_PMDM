@@ -11,7 +11,9 @@ public class Global {
     public static Integer cat_modificada = null;
     public static Integer meta_modificada = null;
 
-    public static ArrayList<Categoria> datos = new ArrayList<>(Arrays.asList(
+    private static ArrayList<Categoria> datos;
+
+    public static ArrayList<Categoria> datos_testing = new ArrayList<>(Arrays.asList(
             new Categoria("test1", "Hola", new ArrayList<>(Arrays.asList(
                     new Meta("test1.a", "Buenas", new ArrayList<>(Arrays.asList(
                             new Tarea("hola")
@@ -23,4 +25,11 @@ public class Global {
                     new Meta("test2.b")
             )))
     ));
+
+    public static ArrayList<Categoria> getDatos() {
+        if (datos == null) {
+            datos = BaseDatos.getDatos(BaseDatos.getInstance().getWritableDatabase());
+        }
+        return datos;
+    }
 }

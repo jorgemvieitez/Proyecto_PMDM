@@ -1,10 +1,13 @@
 package me.jorgemoreno.whattodo.main;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -18,13 +21,17 @@ import java.util.ArrayList;
 import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.Global;
 import me.jorgemoreno.whattodo.R;
+import me.jorgemoreno.whattodo.ajustes.SettingsActivity;
 import me.jorgemoreno.whattodo.data.Categoria;
+import me.jorgemoreno.whattodo.meta_edit.MetaEditActivity;
 
 public class MainActivity extends AppCompatActivity {
     MainFragment main;
+    public static BaseDatos dbMgr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        dbMgr = BaseDatos.getInstance(this, "datos.db", null, 1);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         trans.replace(R.id.fragMain, main);
 
         trans.commit();
+
     }
 
     @Override
@@ -61,5 +69,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuAjustes) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

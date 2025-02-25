@@ -1,6 +1,8 @@
 package me.jorgemoreno.whattodo.meta_edit;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +13,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.TreeMap;
 
+import me.jorgemoreno.whattodo.BaseDatos;
 import me.jorgemoreno.whattodo.R;
 import me.jorgemoreno.whattodo.data.Meta;
 import me.jorgemoreno.whattodo.data.Tarea;
@@ -37,6 +41,8 @@ public class MetaEditListAdapter extends RecyclerView.Adapter<MetaEditListAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // generating this at the time of constructing causes it to be null apparently
+        if (this.context == null) this.context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_meta_edit, parent, false);
 
         return new ViewHolder(view, this);
@@ -45,7 +51,6 @@ public class MetaEditListAdapter extends RecyclerView.Adapter<MetaEditListAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.valor = datos.getTareaAt(position);
-        context = holder.itemView.getContext();
 
         holder.nombre.setText(holder.valor.getNombre());
         holder.checkBox.setChecked(holder.valor.isCompletada());
@@ -84,9 +89,18 @@ public class MetaEditListAdapter extends RecyclerView.Adapter<MetaEditListAdapte
                             parent.datos.removeTarea(valor);
                             Toast.makeText(parent.context, "Tarea borrada", Toast.LENGTH_SHORT).show();
                             parent.notifyItemRemoved(getAdapterPosition());
+                            BaseDatos.deleteTarea(BaseDatos.getInstance().getWritableDatabase(), valor);
                         },
                         (dialog, which) -> {});
                 dialogo.show(parent.parent.getActivity().getSupportFragmentManager(), "borrar");
+            });
+
+            checkBox.setOnClickListener((button) -> {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(parent.context);
+                if (((CheckBox)button).isChecked() && prefs.getBoolean("aplauso", false)) {
+                    MediaPlayer audio = MediaPlayer.create(parent.context, R.raw.clap);
+                    audio.start();
+                }
             });
         }
     }
